@@ -50,9 +50,38 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://growflowai.com.au'),
 }
 
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'GrowFlow AI',
+  url: 'https://growflowai.com.au',
+  logo: 'https://growflowai.com.au/logo-primary.png',
+  description: 'AI automation consulting for Australian small and medium businesses.',
+  areaServed: 'AU',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kew',
+    addressRegion: 'VIC',
+    postalCode: '3101',
+    addressCountry: 'AU',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'info@growflowai.com.au',
+    contactType: 'customer service',
+  },
+  sameAs: ['https://growflowai.com.au'],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-AU" className={jakarta.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className="antialiased font-[family-name:var(--font-jakarta)]">
         <Navbar />
         <main>{children}</main>
